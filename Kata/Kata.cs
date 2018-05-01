@@ -10,7 +10,25 @@ namespace Kata
     {
         public static string Order(string words)
         {
-            return "";
+            if (words == "")
+            {
+                return "";
+            }
+
+            var separatedWords = words.Split(' ').ToList();
+            var kvp = new List<KeyValuePair<int,string>>();
+            foreach (var word in separatedWords)
+            {
+                kvp.Add(new KeyValuePair<int, string>(GetNumberFromString(word), word));
+            }
+
+            var result = new StringBuilder();
+            foreach (var word in kvp.OrderBy(x => x.Key))
+            {
+                result.Append(word.Value + " ");
+            }
+
+            return result.ToString().TrimEnd();
         }
 
         public static int GetNumberFromString(string input)
